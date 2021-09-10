@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <h1>NASAGRAM</h1>
-      <Card/>
-      
+      <Card />
+
     </div>
   );
 }

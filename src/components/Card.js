@@ -58,7 +58,6 @@ const PhotoCard = () => {
                     </IconButton>
                 </CardActions>
             </Card>
-
         </div>
     );
 }
