@@ -64,10 +64,10 @@ const PhotoCard = () => {
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        maxWidth: 600,
     },
     media: {
-        height: 140,
+        height: 300,
     },
 });
 
