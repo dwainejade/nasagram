@@ -15,21 +15,28 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
 const PhotoCard = () => {
-    const [photo, setPhoto] = useState([])
+    const [photos, setPhotos] = useState([])
+    const [faves, setFaves] = useState([])
 
     const fetchPhoto = async () => {
         const { data } = await axios.get(
             `https://api.nasa.gov/planetary/apod?api_key=nLkCcfvqTIIGZoD3O0cP2GDGQn5xRkg0CalOXlB8`
         )
-        setPhoto(data)
+        setPhotos(data)
     }
 
     useEffect(() => {
-        fetchPhoto()
-    }, [])
+        fetchPhoto();
+    }, []);
 
-    console.log("fetchedPhoto: ", photo)
+    console.log("fetchedPhoto: ", photos);
     const classes = useStyles();
+
+    const handleFave = (photo) => {
+        faves.indexOf(photo) === -1 ? faves.push(photo) : faves.splice(faves.indexOf(photo), 1);
+        console.log(faves)
+    }
+    console.log(faves)
 
     return (
         <div className="card-wrapper">
@@ -37,21 +44,21 @@ const PhotoCard = () => {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={photo.url}
-                        title={photo.title}
+                        image={photos.url}
+                        title={photos.title}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            {photo.title}
+                            {photos.title}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {photo.explanation}
+                            {photos.explanation}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+                        <FavoriteIcon onClick={() => handleFave(photos)} />
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon />
