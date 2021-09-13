@@ -19,17 +19,25 @@ import ShareIcon from '@material-ui/icons/Share';
 const Search = () => {
     const [photos, setPhotos] = useState([])
     const [faves, setFaves] = useState([])
+    const [date, setDate] = useState('')
 
     const fetchPhoto = async () => {
         const { data } = await axios.get(
-            `https://api.nasa.gov/planetary/apod?date=2021-09-11&api_key=nLkCcfvqTIIGZoD3O0cP2GDGQn5xRkg0CalOXlB8`
+            `https://api.nasa.gov/planetary/apod?date=${date}&api_key=nLkCcfvqTIIGZoD3O0cP2GDGQn5xRkg0CalOXlB8`
         )
         setPhotos(data)
     }
 
-    useEffect(() => {
-        fetchPhoto();
-    }, []);
+    function getRandomDate() {
+        let m = Math.ceil(Math.random() * 12);
+        let d = Math.ceil(Math.random() * 28);
+        return (m + '-' + d)
+    }
+    console.log(getRandomDate())
+
+    // useEffect(() => {
+    //     fetchPhoto();
+    // }, []);
 
     console.log("fetchedPhoto: ", photos);
     const classes = useStyles();
@@ -38,12 +46,25 @@ const Search = () => {
         faves.indexOf(photo) === -1 ? faves.push(photo) : faves.splice(faves.indexOf(photo), 1);
         console.log(faves)
     }
-    console.log(faves)
+
+    const handleDate = (e) => {
+        setDate(e.target.value)
+        console.log('date', e.target.value)
+        fetchPhoto()
+    }
+
 
     return (
         <div className="card-wrapper">
             <div>
-                <input type="Date" />
+                <input
+                    type="date"
+                    className="form-control"
+                    id="Date"
+                    name="date"
+                    value={date}
+                    onChange={handleDate}
+                />
             </div>
             <Card className={classes.root}>
                 <CardActionArea>

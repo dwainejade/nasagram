@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { PhotoContext } from './PhotoContext'
+
 import axios from 'axios'
 import './Card.css'
 
@@ -8,7 +10,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -16,7 +17,7 @@ import ShareIcon from '@material-ui/icons/Share';
 
 const PhotoCard = () => {
     const [photos, setPhotos] = useState([])
-    const [faves, setFaves] = useState([])
+    const [favorites, setFavorites, handleFave, getFaves, addFaves] = useContext(PhotoContext)
 
     const fetchPhoto = async () => {
         const { data } = await axios.get(
@@ -29,14 +30,8 @@ const PhotoCard = () => {
         fetchPhoto();
     }, []);
 
-    console.log("fetchedPhoto: ", photos);
+    // console.log("fetchedPhoto: ", photos);
     const classes = useStyles();
-
-    const handleFave = (photo) => {
-        faves.indexOf(photo) === -1 ? faves.push(photo) : faves.splice(faves.indexOf(photo), 1);
-        console.log(faves)
-    }
-    console.log(faves)
 
     return (
         <div className="card-wrapper">

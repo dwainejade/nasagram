@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { PhotoProvider } from './components/PhotoContext'
 import './App.css';
 
 import Home from './Pages/Home'
@@ -12,11 +13,14 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/favorites' component={Favorites} />
-          <Route path='/search' component={Search} />
-        </Switch>
+
+        <PhotoProvider>
+          <Switch>
+            <Route path='/' component={Home} exact />
+            <Route path='/favorites' component={Favorites} />
+            <Route path='/search' component={Search} />
+          </Switch>
+        </PhotoProvider>
       </div>
     </BrowserRouter>
   );
