@@ -30,12 +30,37 @@ export const PhotoProvider = props => {
     const handleFave = (photo) => {
         console.log('handleFave')
         let faves = localStorage.getItem('faves') ? JSON.parse(localStorage.getItem('faves')) : []
-        if (faves.some(f => f.title === photo.title)) {
+        // if (faves.some(f => f.title === photo.title)) {
+        //     console.log('duplicate')
+        //     return faves.filter((c) => { return c !== photo })
+        // }
+        // else {
+        //     addFaves(photo)
+        // }
+        const exists = faves.includes(photo)
+        if (exists) {
+            return faves.filter((c) => { return c !== photo })
+        } else {
+            const result = faves
+            result.push(photo)
+            return result
+        }
+        console.log(faves)
 
-            console.log('duplicate')
-        } else { addFaves(photo) }
-        console.log('local: ', faves)
     }
+
+    // remove card from faves
+    // parse the item from localStorage
+    // if (exists) {
+    //     return array.filter((c) => { return c !== item })
+    //   } else {
+    //     const result = array
+    //     result.push(item)
+    //     return result
+    //   }
+    // compare to new object. if they match with one in array then remove object and save array
+
+    // if object does not exist add
 
     // const handleFave = (photo) => {
     //     favorites.indexOf(photo) === -1 ? favorites.push(photo) : favorites.splice(favorites.indexOf(photo), 1);

@@ -4,17 +4,16 @@ import { PhotoContext } from '../components/PhotoContext'
 import CardComponent from '../components/Card'
 import '../components/Card.css'
 
-import { makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
 
 const Favorites = () => {
-    const classes = useStyles();
-    const [favorites, setFavorites, handleFave, getFaves, addFaves] = useContext(PhotoContext)
+
+    const [favorites, setFavorites, getFaves] = useContext(PhotoContext)
 
 
     useEffect(() => {
         getFaves()
-    }, [])
+    }, [getFaves])
 
     return (
         <>
@@ -30,13 +29,5 @@ const Favorites = () => {
     )
 }
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 600,
-    },
-    media: {
-        height: 300,
-    },
-});
 
 export default Favorites
