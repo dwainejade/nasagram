@@ -1,3 +1,8 @@
+/* .nav {
+  display: absolute;
+  position: fixed;
+} */
+
 ul {
   margin: 0;
   padding: 0;
@@ -13,8 +18,18 @@ ul {
   color: #fff;
 }
 
+.navbar a:hover {
+  border-bottom: 2px solid #ddd;
+  color: black;
+}
+.navbar a:active {
+  border-bottom: 2px solid #ddd;
+  color: black;
+}
+
 a {
   text-decoration: none;
   font-size: 1.2rem;
   color: #fff !important;
+  padding: 0 4px;
 }

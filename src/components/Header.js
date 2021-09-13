@@ -2,7 +2,7 @@ import './Header.css'
 
 const Header = () => {
     return (
-        <div>
+        <div className='nav'>
             <ul>
                 <li className='navbar'>
                     <a href='/'>Home</a>
