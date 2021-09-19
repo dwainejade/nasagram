@@ -15,7 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
 const PhotoCard = ({ fav }) => {
-    const [favorites, setFavorites, handleFave, getFaves, addFaves] = useContext(PhotoContext)
+    const [favorites, setFavorites, handleFave, getFaves, addFave] = useContext(PhotoContext)
 
     // console.log("fetchedPhoto: ", photos);
     const classes = useStyles();

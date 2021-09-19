@@ -10,41 +10,43 @@ export const PhotoProvider = props => {
 
     // pull favorites from localStorage
     const getFaves = () => {
-        let faves;
-        if (localStorage.getItem('faves') === null) {
-            faves = []
-        } else {
-            faves = JSON.parse(localStorage.getItem('faves'))
-        }
+        let faves = localStorage.getItem('faves') ? JSON.parse(localStorage.getItem('faves')) : []
         setFavorites(faves)
-        return faves
     }
 
-    // saves favorites to localStorage
-    const addFaves = (photo) => {
-        const faves = getFaves();
-        faves.unshift(photo)
-        localStorage.setItem('faves', JSON.stringify(faves))
+    const saveToLocalStorage = (items) => {
+        localStorage.setItem('faves', JSON.stringify(items))
+    }
+
+    const addFave = (photo, faves) => {
+        const newFave = [photo, ...faves]
+        console.log('Added:', newFave);
+        setFavorites(newFave)
+        saveToLocalStorage(newFave)
+    }
+
+    const removeFave = (photo) => {
+        const newList = favorites.filter(f => f.title !== photo.title)
+        setFavorites(newList)
+        saveToLocalStorage(newList)
+        console.log('Removed:', newList);
+
     }
 
     const handleFave = (photo) => {
         console.log('handleFave')
         let faves = localStorage.getItem('faves') ? JSON.parse(localStorage.getItem('faves')) : []
-        // console.log(faves)
 
         if (faves.some(f => f.title === photo.title)) {
-            console.log('duplicate')
-            let exists = faves.filter(f => f.title !== photo.title)
-            console.log(exists)
-            localStorage.setItem('faves', JSON.stringify(exists))
+            removeFave(photo)
         }
         else {
-            addFaves(photo)
+            addFave(photo, faves)
         }
     }
 
     return (
-        <PhotoContext.Provider value={[favorites, setFavorites, handleFave, getFaves, addFaves,]}>
+        <PhotoContext.Provider value={[favorites, setFavorites, handleFave, getFaves, addFave,]}>
             {props.children}
         </PhotoContext.Provider >
     );
