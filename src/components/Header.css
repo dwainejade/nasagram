@@ -33,3 +33,7 @@ a {
   color: #fff !important;
   padding: 0 4px;
 }
+
+.selected {
+  color: red;
+}
