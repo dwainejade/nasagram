@@ -29,7 +29,7 @@ const Search = () => {
   };
 
   return photos.url ? (
-    <div style={{ height: "100vh" }}>
+    <div>
       <h1>Search</h1>
 
       <div className="date-picker" style={{ marginBottom: "1rem" }}>

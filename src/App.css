@@ -4,6 +4,7 @@
   height: 100%;
   color: ghostwhite;
   padding-bottom: 3rem;
+  min-height: 100vh;
 }
 
 p {
