@@ -17,7 +17,6 @@ import ShareIcon from '@material-ui/icons/Share';
 const PhotoCard = ({ fav }) => {
     const [favorites, setFavorites, handleFave, getFaves, addFave] = useContext(PhotoContext)
 
-    // console.log("fetchedPhoto: ", photos);
     const classes = useStyles();
 
     useEffect(() => {
@@ -50,10 +49,10 @@ const PhotoCard = ({ fav }) => {
                         {
                             favorites.some(f => f.title === fav.title) ? <FavoriteIcon color="secondary" />
                                 :
-                                <FavoriteIcon />
+                                <FavoriteIcon color="action" />
                         }
                     </IconButton>
-                    <IconButton aria-label="share">
+                    <IconButton aria-label="share" onClick={() => { navigator.clipboard.writeText(fav.hdurl) }}>
                         <ShareIcon />
                     </IconButton>
                 </CardActions>

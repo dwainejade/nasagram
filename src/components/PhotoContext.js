@@ -46,7 +46,14 @@ export const PhotoProvider = props => {
     }
 
     return (
-        <PhotoContext.Provider value={[favorites, setFavorites, handleFave, getFaves, addFave,]}>
+        <PhotoContext.Provider
+            value={[
+                favorites,
+                setFavorites,
+                handleFave,
+                getFaves,
+                addFave,
+            ]}>
             {props.children}
         </PhotoContext.Provider >
     );

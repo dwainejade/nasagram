@@ -4,14 +4,12 @@ import axios from 'axios'
 import CardComponent from '../components/Card'
 import Spinner from '../components/Spinner'
 
-
 // import './Card.css'
-
 
 const Search = () => {
     // const [favorites, setFavorites, handleFave, getFaves, addFaves] = useContext(PhotoContext)
     const [photos, setPhotos] = useState([])
-    const [date, setDate] = useState('2018-10-06')
+    const [date, setDate] = useState('2020-10-01')
 
     const fetchPhoto = async () => {
         const { data } = await axios.get(
@@ -33,28 +31,22 @@ const Search = () => {
 
 
     return (
-        photos.url ?
-            <>
-                <h1>Search</h1>
-                <div className="date-picker">
-                    <input
-                        type="date"
-                        className="form-control"
-                        id="Date"
-                        name="date"
-                        value={date}
-                        onChange={handleDate}
-                    />
-                </div>
-                <div className="card-wrapper">
-                    <CardComponent fav={photos} />
-                </div>
-            </>
-            :
-            <div>
-                <h1>Home</h1>
-                <Spinner />
+        <>
+            <h1>Search</h1>
+            <div className="date-picker">
+                <input
+                    type="date"
+                    className="form-control"
+                    id="Date"
+                    name="date"
+                    value={date}
+                    onChange={handleDate}
+                />
             </div>
+            <div className="card-wrapper">
+                <CardComponent fav={photos} />
+            </div>
+        </>
     );
 }
 
