@@ -1,63 +1,109 @@
-import React, { useContext } from 'react'
-import { PhotoContext } from './PhotoContext'
+import React, { useContext, useEffect } from "react";
+import { PhotoContext } from "./PhotoContext";
 
-import './Card.css'
+import "./Card.css";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import { red } from "@mui/material/colors";
+
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 1,
+  m: 2
+};
 
 const PhotoCard = ({ fav }) => {
-    const [favorites, setFavorites, handleFave, getFaves, addFaves] = useContext(PhotoContext)
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [favorites, setFavorites, handleFave, getFaves, addFave] = useContext(
+    PhotoContext
+  );
 
-    // console.log("fetchedPhoto: ", photos);
-    const classes = useStyles();
+  useEffect(() => {
+    getFaves();
+  }, []);
 
-    return (
-        <div className="card-wrapper">
-            <Card className={classes.root}>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={fav.url}
-                        title={fav.title}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {fav.title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {fav.explanation}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-                    <IconButton aria-label="add to favorites" color="action">
-                        <FavoriteIcon color="action" onClick={() => handleFave(fav)} />
-                    </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                </CardActions>
-            </Card>
-        </div>
-    );
-}
+  return (
+    <div className="card-wrapper">
+      <Card sx={{ maxWidth: 550 }}>
+        <CardMedia
+          component="img"
+          height="350"
+          image={fav.url}
+          alt={fav.title}
+          onClick={handleOpen}
+        />
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 600,
-    },
-    media: {
-        height: 300,
-    },
-});
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {fav.title}
+          </Typography>
+          <p>{fav.date}</p>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {fav.explanation}
+          </Typography>
+        </CardContent>
 
-export default PhotoCard
+        <CardActions>
+          <IconButton
+            aria-label="add to favorites"
+            color="inherit"
+            onClick={() => handleFave(fav)}
+          >
+            {favorites.some((f) => f.title === fav.title) ? (
+              <FavoriteIcon sx={{ color: red[600] }} />
+            ) : (
+              <FavoriteIcon color="action" />
+            )}
+          </IconButton>
+          <IconButton
+            aria-label="share"
+            onClick={() => {
+              navigator.clipboard.writeText(fav.hdurl);
+            }}
+          >
+            <ShareIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div
+            style={{ position: "relative", float: "right", cursor: "pointer" }}
+            onClick={handleClose}
+          >
+            Close X
+          </div>
+          <img
+            src={fav.url}
+            alt={fav.title}
+            style={{ objectFit: "contain", maxHeight: "90vh" }}
+          />
+        </Box>
+      </Modal>
+    </div>
+  );
+};
+
+export default PhotoCard;
