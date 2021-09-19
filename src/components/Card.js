@@ -15,16 +15,29 @@ import { red } from "@mui/material/colors";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 1,
-  m: 2
+  modal: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    // boxShadow: 24,
+    p: 1
+  },
+  btn: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    color: "white",
+    padding: "1rem"
+  },
+  image: {
+    maxWidth: "95vw",
+    maxHeight: "95vh"
+  }
 };
 
 const PhotoCard = ({ fav }) => {
@@ -88,18 +101,11 @@ const PhotoCard = ({ fav }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <div
-            style={{ position: "relative", float: "right", cursor: "pointer" }}
-            onClick={handleClose}
-          >
-            Close X
+        <Box sx={style.modal}>
+          <div onClick={handleClose} style={style.btn}>
+            <CancelIcon />
           </div>
-          <img
-            src={fav.url}
-            alt={fav.title}
-            style={{ objectFit: "contain", maxHeight: "90vh" }}
-          />
+          <img src={fav.url} alt={fav.title} style={style.image} />
         </Box>
       </Modal>
     </div>

@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return photos.url ? (
-    <div style={{ height: "100vh" }}>
+    <div>
       <h1>Home</h1>
       <Card fav={photos} />
     </div>
