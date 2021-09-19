@@ -1,17 +1,40 @@
-import './Header.css'
+import { NavLink } from "react-router-dom";
+import "./Header.css";
 
 const Header = () => {
-    return (
-        <div className='nav'>
-            <ul>
-                <li className='navbar'>
-                    <a href='/'>Home</a>
-                    <a href="/favorites">Favorites</a>
-                    <a href="/search">Search</a>
-                </li>
-            </ul>
-        </div>
-    )
-}
+  return (
+    <div className="nav">
+      <ul>
+        <li className="navbar">
+          <NavLink
+            to="/"
+            exact
+            activeStyle={{
+              fontWeight: "bold"
+            }}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/favorites"
+            activeStyle={{
+              fontWeight: "bold"
+            }}
+          >
+            Favorites
+          </NavLink>
+          <NavLink
+            to="/search"
+            activeStyle={{
+              fontWeight: "bold"
+            }}
+          >
+            Search
+          </NavLink>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export default Header;
