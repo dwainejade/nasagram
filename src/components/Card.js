@@ -21,9 +21,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-
   bgcolor: "background.paper",
-  //   border: "2px solid #000",
   boxShadow: 24,
   p: 1,
   m: 2
@@ -44,7 +42,6 @@ const PhotoCard = ({ fav }) => {
   return (
     <div className="card-wrapper">
       <Card sx={{ maxWidth: 550 }}>
-        {/* <Link to='/hd-image' image={fav}> */}
         <CardMedia
           component="img"
           height="350"
@@ -52,7 +49,7 @@ const PhotoCard = ({ fav }) => {
           alt={fav.title}
           onClick={handleOpen}
         />
-        {/* </Link> */}
+
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {fav.title}
