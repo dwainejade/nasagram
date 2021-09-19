@@ -1,9 +1,9 @@
-
-
 import React, { useState, useEffect } from 'react'
 // import { PhotoContext } from '../components/PhotoContext'
 import axios from 'axios'
 import CardComponent from '../components/Card'
+import Spinner from '../components/Spinner'
+
 
 // import './Card.css'
 
@@ -33,22 +33,28 @@ const Search = () => {
 
 
     return (
-        <>
-            <h1>Search</h1>
-            <div className="date-picker">
-                <input
-                    type="date"
-                    className="form-control"
-                    id="Date"
-                    name="date"
-                    value={date}
-                    onChange={handleDate}
-                />
+        photos.url ?
+            <>
+                <h1>Search</h1>
+                <div className="date-picker">
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="Date"
+                        name="date"
+                        value={date}
+                        onChange={handleDate}
+                    />
+                </div>
+                <div className="card-wrapper">
+                    <CardComponent fav={photos} />
+                </div>
+            </>
+            :
+            <div>
+                <h1>Home</h1>
+                <Spinner />
             </div>
-            <div className="card-wrapper">
-                <CardComponent fav={photos} />
-            </div>
-        </>
     );
 }
 

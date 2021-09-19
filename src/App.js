@@ -13,7 +13,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-
         <PhotoProvider>
           <Switch>
             <Route path='/' component={Home} exact />

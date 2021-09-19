@@ -8,12 +8,11 @@ import { useEffect } from 'react';
 
 const Favorites = () => {
 
-    const [favorites, setFavorites, getFaves] = useContext(PhotoContext)
-
+    const [favorites, setFavorites, handleFave, getFaves] = useContext(PhotoContext)
 
     useEffect(() => {
         getFaves()
-    }, [getFaves])
+    }, [])
 
     return (
         <>

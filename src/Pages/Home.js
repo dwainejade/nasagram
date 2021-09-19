@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 // import { PhotoContext } from '../components/PhotoContext'
 import axios from 'axios'
 import Card from '../components/Card'
+import Spinner from '../components/Spinner'
 
-const Home = ({ fav }) => {
+const Home = () => {
     const [photos, setPhotos] = useState([])
 
 
@@ -19,10 +20,16 @@ const Home = ({ fav }) => {
     }, []);
 
     return (
-        <div>
-            <h1>Home</h1>
-            <Card fav={photos} />
-        </div>
+        photos.url ?
+            <div>
+                <h1>Home</h1>
+                <Card fav={photos} />
+            </div>
+            :
+            <div>
+                <h1>Home</h1>
+                <Spinner />
+            </div>
     )
 }
 
