@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { PhotoContext } from './PhotoContext'
 
 import './Card.css'
@@ -20,6 +20,10 @@ const PhotoCard = ({ fav }) => {
     // console.log("fetchedPhoto: ", photos);
     const classes = useStyles();
 
+    useEffect(() => {
+        getFaves()
+    }, [])
+
     return (
         <div className="card-wrapper">
             <Card className={classes.root}>
@@ -33,14 +37,21 @@ const PhotoCard = ({ fav }) => {
                         <Typography gutterBottom variant="h5" component="h2">
                             {fav.title}
                         </Typography>
+                        <p>
+                            {fav.date}
+                        </p>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {fav.explanation}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <IconButton aria-label="add to favorites" color="action">
-                        <FavoriteIcon color="action" onClick={() => handleFave(fav)} />
+                    <IconButton aria-label="add to favorites" color="inherit" onClick={() => handleFave(fav)} >
+                        {
+                            favorites.some(f => f.title === fav.title) ? <FavoriteIcon color="secondary" />
+                                :
+                                <FavoriteIcon />
+                        }
                     </IconButton>
                     <IconButton aria-label="share">
                         <ShareIcon />
