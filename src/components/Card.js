@@ -1,5 +1,8 @@
-import React, { useContext, useEffect } from 'react'
-import { PhotoContext } from './PhotoContext'
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { PhotoContext } from './PhotoContext';
+
+import FullSizeImage from './FullSizeImage'
 
 import './Card.css'
 
@@ -27,11 +30,13 @@ const PhotoCard = ({ fav }) => {
         <div className="card-wrapper">
             <Card className={classes.root}>
                 <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={fav.url}
-                        title={fav.title}
-                    />
+                    <Link to='/hd-image' image={fav.url}>
+                        <CardMedia
+                            className={classes.media}
+                            image={fav.url}
+                            title={fav.title}
+                        />
+                    </Link>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             {fav.title}
