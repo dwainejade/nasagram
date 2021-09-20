@@ -17,6 +17,12 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CancelIcon from "@mui/icons-material/Cancel";
 
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Button from "@mui/material/Button";
+
 const style = {
   modal: {
     position: "absolute",
@@ -46,7 +52,14 @@ const PhotoCard = ({ fav }) => {
   const [favorites, setFavorites, handleFave, getFaves, addFave] = useContext(
     PhotoContext
   );
-  const [open, setOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -90,7 +103,9 @@ const PhotoCard = ({ fav }) => {
           <IconButton
             aria-label="share"
             onClick={() => {
-              navigator.clipboard.writeText(this.state.textToCopy);
+              const url = fav.url;
+              navigator.clipboard.writeText(url);
+              handleAlertOpen();
             }}
           >
             <ShareIcon />
@@ -110,6 +125,21 @@ const PhotoCard = ({ fav }) => {
           <img src={fav.url} alt={fav.title} style={style.image} />
         </Box>
       </Modal>
+      <Dialog
+        open={alertOpen}
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Link copied to clipboard
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose}>Ok</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
