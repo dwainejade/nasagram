@@ -10,7 +10,8 @@ const Header = () => {
             to="/"
             exact
             activeStyle={{
-              fontWeight: "bold"
+              // fontWeight: "bold",
+              borderBottom: "2px solid salmon"
             }}
           >
             Home
@@ -18,7 +19,8 @@ const Header = () => {
           <NavLink
             to="/favorites"
             activeStyle={{
-              fontWeight: "bold"
+              // fontWeight: "bold",
+              borderBottom: "2px solid salmon"
             }}
           >
             Favorites
@@ -26,7 +28,8 @@ const Header = () => {
           <NavLink
             to="/search"
             activeStyle={{
-              fontWeight: "bold"
+              // fontWeight: "bold",
+              borderBottom: "2px solid salmon"
             }}
           >
             Search

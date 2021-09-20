@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PhotoContext } from "./PhotoContext";
 
 import "./Card.css";
@@ -32,7 +32,9 @@ const style = {
     right: 0,
     top: 0,
     color: "white",
-    padding: "1rem"
+    cursor: "pointer",
+    margin: "1rem",
+    backgroundColor: "rgb(0,0,0, 0.4)"
   },
   image: {
     maxWidth: "95vw",
@@ -41,12 +43,12 @@ const style = {
 };
 
 const PhotoCard = ({ fav }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [favorites, setFavorites, handleFave, getFaves, addFave] = useContext(
     PhotoContext
   );
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     getFaves();
@@ -88,7 +90,7 @@ const PhotoCard = ({ fav }) => {
           <IconButton
             aria-label="share"
             onClick={() => {
-              navigator.clipboard.writeText(fav.hdurl);
+              navigator.clipboard.writeText(this.state.textToCopy);
             }}
           >
             <ShareIcon />
