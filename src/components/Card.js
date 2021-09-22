@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PhotoContext } from "./PhotoContext";
+import ReactPlayer from "react-player";
 
 import "./Card.css";
 
@@ -70,13 +71,17 @@ const PhotoCard = ({ fav }) => {
   return (
     <div className="card-wrapper">
       <Card sx={{ maxWidth: 550 }}>
-        <CardMedia
-          component="img"
-          height="350"
-          image={fav.url}
-          alt={fav.title}
-          onClick={handleOpen}
-        />
+        {fav.media_type === "video" ? (
+          <ReactPlayer url={fav.url} controls />
+        ) : (
+          <CardMedia
+            component="img"
+            height="350"
+            image={fav.url}
+            alt={fav.title}
+            onClick={handleOpen}
+          />
+        )}
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
